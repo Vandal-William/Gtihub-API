@@ -1,34 +1,27 @@
 // == Composant
 import { Header, Icon } from 'semantic-ui-react';
+import { useState } from 'react';
+import axios from 'axios';
+
 import SearchBar from 'src/components/SearchBar';
 import Message from 'src/components/Message';
 import ReposResults from 'src/components/ReposResults';
 import './style.scss';
-import { useState } from 'react';
 
 function App() {
   const [queryValue, setQueyValue] = useState('');
-  const [result, setResult] = useState(1);
-  const [data, setData] = useState([
-    {
-      id: 1,
-      title: 'DataTitre',
-      subtitle: 'DataSoutitre',
-      description: 'DataDescription',
-      image: 'https://react.semantic-ui.com/images/avatar/large/daniel.jpg',
-    },
-
-    {
-      id: 2,
-      title: 'DataTitre2',
-      subtitle: 'DataSoutitre2',
-      description: 'DataDescription2',
-      image: 'https://react.semantic-ui.com/images/avatar/large/daniel.jpg',
-    },
-  ]);
+  const [result, setResult] = useState(0);
+  const [data, setData] = useState([]);
 
   const setChangeValue = (value) => {
     setQueyValue(value);
+  };
+
+  const queryReposApi = async (value) => {
+    const response = await axios.get(`https://api.github.com/search/repositories?q=${value}`);
+    setData(response.data.items);
+    console.log(response.data.items);
+    setResult(response.data.items.length);
   };
 
   return (
@@ -36,7 +29,11 @@ function App() {
       <Header className="app-header" as="h1" textAlign="center">
         <Icon name="github" /> GitHub
       </Header>
-      <SearchBar queryValue={queryValue} setChangeValue={setChangeValue} />
+      <SearchBar
+        queryValue={queryValue}
+        setChangeValue={setChangeValue}
+        queryReposApi={queryReposApi}
+      />
       <Message result={result} />
       <ReposResults data={data} />
     </div>
