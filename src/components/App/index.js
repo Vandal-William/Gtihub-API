@@ -12,7 +12,7 @@ function App() {
         <Icon name="github" /> GitHub
       </Header>
       <SearchBar />
-      <Message />
+      <Message result={1} />
       <ReposResults />
     </div>
   );
