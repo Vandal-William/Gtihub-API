@@ -9,6 +9,7 @@ function Result({
   description,
   image,
   link,
+  auther,
 }) {
   return (
     <Card className="card">
@@ -25,6 +26,12 @@ function Result({
           <Icon name="user" />
           Repos GitHub
         </a>
+        {auther && (
+          <a href={auther} target="__blanc">
+            <Icon name="user" />
+            Home page
+          </a>
+        )}
       </Card.Content>
     </Card>
   );
@@ -32,10 +39,15 @@ function Result({
 
 Result.propTypes = {
   title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
   description: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
+  auther: PropTypes.string,
+};
+Result.defaultProps = {
+  subtitle: '',
+  auther: '',
 };
 // == Export
 export default Result;

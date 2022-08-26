@@ -1,9 +1,14 @@
 // == Composant
-import { Input, Form, Label, Button } from 'semantic-ui-react';
+import { Input, Form } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import './style.scss';
 
-function SearchBar({ queryValue, setChangeValue, queryReposApi }) {
+function SearchBar({
+  queryValue,
+  setChangeValue,
+  queryReposApi,
+  isLoading,
+}) {
   const handleChange = (event) => {
     setChangeValue(event.target.value);
   };
@@ -15,12 +20,13 @@ function SearchBar({ queryValue, setChangeValue, queryReposApi }) {
       <Form.Field>
         <Input
           fluid
-          label={{ as: 'a', tag: false, content: 'Recherche', basic: true }}
+          icon="search"
+          iconPosition="left"
           placeholder="Search..."
+          loading={isLoading}
           value={queryValue}
           onChange={handleChange}
-        >
-        </Input>
+        />
       </Form.Field>
     </Form>
   );
@@ -30,6 +36,7 @@ SearchBar.propTypes = {
   queryValue: PropTypes.string.isRequired,
   setChangeValue: PropTypes.func.isRequired,
   queryReposApi: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 // == Export
 export default SearchBar;

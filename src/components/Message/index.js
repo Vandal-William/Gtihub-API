@@ -1,15 +1,16 @@
 // == Composant
-import { Segment } from 'semantic-ui-react';
+import { Message as Msg } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-function Message({ result }) {
+function Message({ result, isError }) {
   return (
-    <Segment> La recherche a donné {result} résultats </Segment>
+    <Msg negative={isError}> {result} </Msg>
   );
 }
 
 Message.propTypes = {
-  result: PropTypes.number.isRequired,
+  result: PropTypes.string.isRequired,
+  isError: PropTypes.bool.isRequired,
 };
 // == Export
 export default Message;

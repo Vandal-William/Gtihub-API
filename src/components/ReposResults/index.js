@@ -2,6 +2,7 @@
 import Result from 'src/components/Result';
 import PropTypes from 'prop-types';
 import './style.scss';
+import { Button, Segment } from 'semantic-ui-react';
 
 function ReposResults({ data }) {
   return (
@@ -12,11 +13,12 @@ function ReposResults({ data }) {
           title={result.name}
           subtitle={result.language}
           description={result.description}
-          image="https://react.semantic-ui.com/images/avatar/large/matthew.png"
+          image={result.owner.avatar_url}
           link={result.svn_url}
+          auther={result.homepage}
         />
-
       ))}
+      {data.lenght > 0 && <Segment> <Button> Voire plus </Button> </Segment>}
     </ul>
   );
 }
