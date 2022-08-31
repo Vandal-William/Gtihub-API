@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './style.scss';
 import { Button, Segment } from 'semantic-ui-react';
 
-function ReposResults({ data }) {
+function ReposResults({ data, isLoading, loadMore }) {
   return (
     <ul className="ReposResults">
       {data.map((result) => (
@@ -18,13 +18,19 @@ function ReposResults({ data }) {
           auther={result.homepage}
         />
       ))}
-      {data.lenght > 0 && <Segment> <Button> Voire plus </Button> </Segment>}
+      {data.length > 0 && (
+        <Segment textAlign="center">
+          <Button loading={isLoading} onClick={loadMore}> Voir plus de résultats </Button>
+        </Segment>
+      )}
     </ul>
   );
 }
 
 ReposResults.propTypes = {
   data: PropTypes.array.isRequired,
+  loadMore: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 // == Export
 export default ReposResults;

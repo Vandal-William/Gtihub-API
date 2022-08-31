@@ -21,7 +21,7 @@ function Result({
           {description}
         </Card.Description>
       </Card.Content>
-      <Card.Content extra>
+      <Card.Content extra className="extra">
         <a href={link} target="__blanc">
           <Icon name="user" />
           Repos GitHub

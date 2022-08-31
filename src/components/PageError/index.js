@@ -4,7 +4,7 @@ import { Segment } from 'semantic-ui-react';
 
 function PageError() {
   return (
-    <Segment> Page Not Found </Segment>
+    <Segment> 404 Page Not Found </Segment>
   );
 }
 
